@@ -117,9 +117,9 @@ export const login = async (req, res) => {
 export const logout = (req, res) => {
   res.clearCookie("jwt", {
     httpOnly: true,
-    sameSite: "strict",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     secure: process.env.NODE_ENV === "production",
-    path: "/", // add this to match generateToken
+    path: "/",
   });
   res.status(200).json({ message: "Logged out successfully" });
 };

@@ -17,8 +17,9 @@ if(!TOKEN_SECRET) {
     res.cookie("jwt" , token, {
         maxAge:7*24*60*60*1000 , //7days
         httpOnly:true, // prevents XSS attacks Cross-site scripting
-        sameSite:"strict" , //CSRF attacks
-        secure:process.env.NODE_ENV === "production" //only https in production
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+        secure: process.env.NODE_ENV === "production", // only https in production
+        path: "/",
     })
 
 return token;

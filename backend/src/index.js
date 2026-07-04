@@ -21,10 +21,24 @@ app.use(express.urlencoded({  limit: "10mb", extended: true }))
 app.use(cookieParser()) // req.cookies
 // Allow CORS from local dev and from a production frontend URL provided
 // via the FRONTEND_URL environment variable (set this in Railway).
-const allowedOrigins = [process.env.FRONTEND_URL, 'http://localhost:5173'].filter(Boolean)
+const allowedOrigins = [process.env.FRONTEND_URL?.trim(), 'http://localhost:5173'].filter(Boolean)
+
+const isAllowedOrigin = (origin) => {
+  if (!origin) return true
+  if (allowedOrigins.includes(origin)) return true
+  if (origin.endsWith('.vercel.app')) return true
+  return false
+}
+
 app.use(cors({
-  origin: allowedOrigins,
+  origin: (origin, callback) => {
+    if (isAllowedOrigin(origin)) return callback(null, true)
+    callback(new Error('Not allowed by CORS'))
+  },
   credentials: true,
+  optionsSuccessStatus: 204,
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['Content-Type', 'Authorization'],
 }))
 
 import authRoutes from "./routes/auth.route.js"

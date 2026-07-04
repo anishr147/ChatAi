@@ -5,10 +5,14 @@ const getApiBaseURL = () => {
     return 'http://localhost:5000/api'
   }
 
-  const envUrl = import.meta.env.VITE_API_URL
+  let envUrl = import.meta.env.VITE_API_URL
   if (!envUrl) return '/api'
 
-  // Ensure the URL ends with a single `/api` (avoid double slashes)
+  envUrl = envUrl.trim()
+  if (!/^https?:\/\//i.test(envUrl)) {
+    envUrl = `https://${envUrl}`
+  }
+
   return envUrl.endsWith('/api') ? envUrl : `${envUrl.replace(/\/+$/g, '')}/api`
 }
 

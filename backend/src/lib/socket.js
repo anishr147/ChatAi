@@ -10,11 +10,15 @@ const app = express();
 const server = http.createServer(app);
 
 // Allow WebSocket connections from local dev and production frontend (via FRONTEND_URL env)
-const allowedSocketOrigins = [process.env.FRONTEND_URL, 'http://localhost:5173'].filter(Boolean)
+const allowedSocketOrigins = [process.env.FRONTEND_URL, 'http://localhost:5173']
 
 const io = new Server(server, {
   cors: {
-    origin: allowedSocketOrigins,
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true)
+      if (allowedSocketOrigins.includes(origin)) return callback(null, true)
+      callback(new Error('Not allowed by CORS'))
+    },
     credentials: true,
   },
 });

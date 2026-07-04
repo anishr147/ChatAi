@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run build --prefix fronted",
-    "start": "npm run start --prefix backend"
+    "start": "npm run start --prefix backend",
+    "postinstall": "npm install --prefix fronted"
   },
   "keywords": [],
   "author": "",

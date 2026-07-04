@@ -1,7 +1,7 @@
 import {useChatStore} from "../store/useChatStore.js";
 import {useAuthStore} from "../store/useAuthStore.js";
 import { useEffect } from "react";
-import UsersLoadingState from "./usersLoadingState";
+import UsersLoadingState from "./UsersLoadingState";
 import NoChatsFound from "./NoChatsFound";
 
 function ContactsList() {

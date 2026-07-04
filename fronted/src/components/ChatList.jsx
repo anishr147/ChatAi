@@ -1,7 +1,7 @@
 
 import { useEffect } from "react";
 import { useChatStore } from "../store/useChatStore";
-import UsersLoadingState from "./usersLoadingState";
+import UsersLoadingState from "./UsersLoadingState";
 import NoChatsFound from "./NoChatsFound";
 import { useAuthStore } from "../store/useAuthStore";
 

@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm run build --prefix fronted",
+    "build": "npm install --prefix backend && npm run build --prefix fronted",
     "start": "npm run start --prefix backend",
-    "postinstall": "npm install --prefix fronted"
+    "postinstall": "npm install --prefix backend && npm install --prefix fronted"
   },
   "keywords": [],
   "author": "",

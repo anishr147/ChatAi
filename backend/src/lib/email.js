@@ -16,7 +16,7 @@ const sendWelcomeEmail = async (email, name) => {
   from: `"ChatAi" <${process.env.EMAIL_USER}>`,
   to: email,
   subject: "Welcome to ChatAi 🚀",
-  text: `Hi ${name}, welcome to ChatAi! Visit ${CLIENT_URL}`,
+  text: `Hi ${name}, welcome to ChatAi! Visit ${process.env.CLIENT_URL} to get started.`,
   html: `
   <!DOCTYPE html>
   <html>
@@ -73,7 +73,7 @@ const sendWelcomeEmail = async (email, name) => {
 
                 <div style="text-align:center;margin:40px 0;">
 
-                  <a href="${CLIENT_URL}"
+                  <a href="${process.env.CLIENT_URL}"
                     style="
                       background:#4F46E5;
                       color:white;
